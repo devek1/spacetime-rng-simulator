@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta property="og:image:alt" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+  <!-- Add your site or application content here -->
+  <h2>Name</h2>
+  <input type="string" id="name" value="A" onchange="playername=this.value">
+  <h2>Outlands</h2>
+  <p>
+    Skipped: <input type="checkbox" id="outlands_skip" onchange="outlands_skip=this.checked"> <br/>
+    Number of encounters before first puzzle: <input type="number" id="outlandsreal" onchange="outlandsreal=this.value"> <br/>
+    Number of encounters before second puzzle: <input type="number" id="outlands1" onchange="outlands1=this.value"> <br/>
+    Number of encounters before third puzzle: <input type="number" id="outlands2" onchange="outlands2=this.value"> <br/>
+    Number of encounters before fourth puzzle: <input type="number" id="outlands3" onchange="outlands3=this.value"> <br/>
+    Number of encounters after all puzzles: <input type="number" id="outlands4" onchange="outlands4=this.value"> <br/>
+    (it is recommended to do most encounters at the very start, going in and out of zigzag room inbetween, for a full encounter count reset) <br/>
+    (it is assumed that you complete each Outlands puzzle on the first roll, and don't leave and re-enter any room with an active puzzle)
+  </p>
+
+  <h2>Starton</h2>
+  <p>
+    Number of encounters before fire wall: <input type="number" id="starton1" onchange="starton1=this.value"> <br/>
+    Number of encounter after fire wall: <input type="number" id="starton2" onchange="starton2=this.value"> <br/>
+    (it is recommended to do most encounters late, as going between the bridge and Greater Dog's room fully resets the encounter count)
+  </p>
+
+  <h2>Foundry</h2>
+  <p>
+    Number of encounters: <input type="number" id="foundry" onchange="foundry=this.value"> <br/>
+    Number of spear cycles seen in Spears 2: <input type="number" id="spears" onchange="spears=this.value"> <br/>
+    (it is recommended to do most encounters in the room right after Gerson's shop, for full encounter count resets) <br/>
+    (you may have to slightly adjust the spears number from what's actually seen to get it right.
+    For NERS's 39:42 Neutral Glitched, 23 seems to be the correct number.
+  </p>
+
+  <h2>Aerialis</h2>
+  <p>
+    Number of encounters before Arts & Crafts show: <input type="number" id="aerialis" onchange="aerialis=this.value"> <br/>
+    This simulator cannot handle encounters past the Jetpack minigame, as the minigame does an unpredictable amount of RNG calls. <br/>
+    Any Mettaton show room, as well as the elevators and Alphys's lab, all give full encounter count resets.
+  </p>
+
+  <input type="button" value="Calculate" id="calc" onclick="runSimulation()">
+
+
+  <h1>Results</h1>
+  <p id="results"></p>
+  <script src="ts/app.js"></script>
+</body>
+
+</html>
