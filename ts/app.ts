@@ -348,11 +348,11 @@ function runSimulation() {
   for (let i = 0; i < 4; i++) {
     results.textContent += "\r\n\r\n"
     for (let j = 0; j < encounters_total[i].length; j++) {
-        results.textContent += encounters_total[i][j].name + " (" + step_factors[i][j] + "), \r\n"
         kills[i] += encounters_total[i][j].enemies.length;
         bullies[i] += encounters_total[i][j].enemies.filter((enemy : string) => (!nonBullyable.includes(enemy))).length;
+        results.textContent += "[" + kills[i] + "/" + bullies[i] + "] " + encounters_total[i][j].name + " (" + step_factors[i][j] + "), \r\n"
     }
-    results.textContent += "Total potential Kills in Area: " + kills[i] + " \r\nTotal potential Bullies in Area: " + bullies[i] + " \r\n";
+    //results.textContent += "Total potential Kills in Area: " + kills[i] + " \r\nTotal potential Bullies in Area: " + bullies[i] + " \r\n";
   }
 
 }
