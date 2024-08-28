@@ -168,9 +168,12 @@ let step_factors = [
     []
 ];
 let playername = 'A';
-let outlands_skip = false;
-let outlandsreal, outlands1, outlands2, outlands3, outlands4, starton1, starton2, foundry, spears, aerialis;
-let kills, bullies;
+let outlands_skip = false, jetpack_skip = false;
+let outlandsreal, outlands1, outlands2, outlands3, outlands4, starton1, starton2, foundry, spears, aerialis, aerialis2;
+let kills, bullies, outlands_puzzle1, outlands_puzzle3, jetpack_boosters = [false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false];
 let encounters = '';
 var areas;
 (function (areas) {
@@ -244,18 +247,18 @@ function runSimulation() {
     step_factors = [[], [], [], []];
     kills = [0, 0, 0, 0];
     bullies = [0, 0, 0, 0];
+    for (let i = 0; i < 16; i++)
+        jetpack_boosters[i] == false;
     if (!outlands_skip) {
         for (let i = 0; i < outlandsreal; i++)
             Encounter(areas.Outlands);
-        for (let i = 0; i < 4; i++)
-            overworld_rng.next_void();
+        outlands_puzzle1 = CosmosUtils.populate(4, () => overworld_rng.int(4) + 1);
         for (let i = 0; i < outlands1; i++)
             Encounter(areas.Outlands);
         overworld_rng.next_void();
         for (let i = 0; i < outlands2; i++)
             Encounter(areas.Outlands);
-        for (let i = 0; i < 4; i++)
-            overworld_rng.next_void();
+        outlands_puzzle3 = CosmosUtils.populate(5, () => overworld_rng.int(4) + 1);
         for (let i = 0; i < outlands3; i++)
             Encounter(areas.Outlands);
         overworld_rng.next_void();
@@ -274,12 +277,25 @@ function runSimulation() {
         overworld_rng.next_void();
     for (let i = 0; i < aerialis; i++)
         Encounter(areas.Aerialis);
+    if (!jetpack_skip) {
+        overworld_rng.next_void();
+        for (let i = 0; i < 16; i++) {
+            overworld_rng.next_void();
+            jetpack_boosters[i] = overworld_rng.next() < 3 / 4;
+        }
+    }
     for (let i = 0; i < 4; i++) {
         results.textContent += "\r\n\r\n";
         for (let j = 0; j < encounters_total[i].length; j++) {
             kills[i] += encounters_total[i][j].enemies.length;
             bullies[i] += encounters_total[i][j].enemies.filter((enemy) => (!nonBullyable.includes(enemy))).length;
             results.textContent += "[" + kills[i] + "/" + bullies[i] + "] " + encounters_total[i][j].name + " (" + step_factors[i][j] + "), \r\n";
+        }
+        if (i == 0 && !outlands_skip) {
+            results.textContent += "Outlands Puzzle 1 pattern: " + outlands_puzzle1 + "\r\nOutlands Puzzle 3 pattern: " + outlands_puzzle3 + "\r\n";
+        }
+        if (i == 3 && !jetpack_skip) {
+            results.textContent += "Jetpack booster pattern: " + jetpack_boosters.map((x) => x ? "Good" : "Bad") + "\r\n";
         }
         //results.textContent += "Total potential Kills in Area: " + kills[i] + " \r\nTotal potential Bullies in Area: " + bullies[i] + " \r\n";
     }
