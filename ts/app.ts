@@ -361,6 +361,9 @@ function runSimulation() {
           jetpack_boosters[i] = overworld_rng.next() < 3 / 4;
       }
   }
+  for (let i = 0; i < aerialis2; i++) {
+    Encounter(areas.Aerialis);
+  }
   for (let i = 0; i < 4; i++) {
     results.textContent += "\r\n\r\n"
     for (let j = 0; j < encounters_total[i].length; j++) {
