@@ -179,6 +179,7 @@ class OutertaleGroup{
 
 const results = document.getElementById("results");
 results.setAttribute('style', 'white-space: pre;');
+const namewarning = document.getElementById('namewarning');
 
 const groups = {
   froggit: new OutertaleGroup(0, "Froggit", ["Froggit"]),

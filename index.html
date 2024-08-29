@@ -27,7 +27,9 @@
 
   <!-- Add your site or application content here -->
   <h2>Name</h2>
-  <input type="string" id="name" value="A" onchange="playername=this.value">
+  <input type="string" id="name" value="A" onchange="playername=this.value;
+      namewarning.textContent = this.value.length > 6 ? 'Warning: name is too long to use legitimately' : ''" />
+  <h1 id="namewarning"></h1>
   <h2>Outlands</h2>
   <p>
     Skipped: <input type="checkbox" id="outlands_skip" onchange="outlands_skip=this.checked"> <br/>
