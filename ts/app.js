@@ -121,7 +121,8 @@ const CosmosUtils = {
     }
 };
 class OutertaleGroup {
-    constructor(name, enemies) {
+    constructor(id, name, enemies) {
+        this.id = id;
         this.name = name;
         this.enemies = enemies;
     }
@@ -129,32 +130,32 @@ class OutertaleGroup {
 const results = document.getElementById("results");
 results.setAttribute('style', 'white-space: pre;');
 const groups = {
-    froggit: new OutertaleGroup("Froggit", ["Froggit"]),
-    whimsun: new OutertaleGroup("Whimsun", ["Whimsun"]),
-    froggitWhimsun: new OutertaleGroup("Froggit/Whimsun", ["Froggit", "Whimsun"]),
-    moldsmal: new OutertaleGroup("Double Mold", ["Moldsmal", "Moldsmal"]),
-    moldsmalMigosp: new OutertaleGroup("Mold/Migosp", ["Moldsmal", "Migosp"]),
-    loox: new OutertaleGroup("Double Loox", ["Loox", "Loox"]),
-    mushy: new OutertaleGroup("Mushy", ["Mushy"]),
-    looxMigospWhimsun: new OutertaleGroup("Outlands Triple", ["Loox", "Migosp", "Whimsun"]),
-    jerry: new OutertaleGroup("Jerry", ["Jerry"]),
-    stardrake: new OutertaleGroup("Stardrake", ["Stardrake"]),
-    spacetop: new OutertaleGroup("Astro Serf", ["Astro Serf"]),
-    stardrakeSpacetopJerry: new OutertaleGroup("Starton Triple", ["Stardrake", "Jerry", "Astro Serf"]),
-    stardrakeSpacetop: new OutertaleGroup("Stardrake/Astro", ["Stardrake", "Astro Serf"]),
-    spacetopJerry: new OutertaleGroup("Astro/Jerry", ["Astro Serf", "Jerry"]),
-    mouse: new OutertaleGroup("Whizkarat", ["Whizkarat"]),
-    woshua: new OutertaleGroup("Woshua", ["Woshua"]),
-    moldbygg: new OutertaleGroup("Moldbygg", ["Moldbygg"]),
-    moldfake: new OutertaleGroup("Moldbygg (Disguised)", ["Moldbygg (Disguised)"]),
-    moldsmalMoldbygg: new OutertaleGroup("Holy Moldy", ["Moldsmal", "Moldbygg (Disguised)"]),
-    woshuaMoldbygg: new OutertaleGroup("Woshua/Mold", ["Woshua", "Moldbygg"]),
-    radtile: new OutertaleGroup("Radtile", ["Radtile"]),
-    pyrope: new OutertaleGroup("Pyrope", ["Pyrope"]),
-    tsundere: new OutertaleGroup("Tsunderplane", ["Tsunderplane"]),
-    spacetopTsundere: new OutertaleGroup("Astro/Tsunder", ["Astro Serf", "Tsunderplane"]),
-    pyropeTsundere: new OutertaleGroup("Pyrope/Tsunder", ["Pyrope", "Tsunderplane"]),
-    perigee: new OutertaleGroup("Perigee", ["Perigee"]),
+    froggit: new OutertaleGroup(0, "Froggit", ["Froggit"]),
+    whimsun: new OutertaleGroup(1, "Whimsun", ["Whimsun"]),
+    froggitWhimsun: new OutertaleGroup(2, "Froggit/Whimsun", ["Froggit", "Whimsun"]),
+    moldsmal: new OutertaleGroup(7, "Double Mold", ["Moldsmal", "Moldsmal"]),
+    moldsmalMigosp: new OutertaleGroup(3, "Mold/Migosp", ["Moldsmal", "Migosp"]),
+    loox: new OutertaleGroup(4, "Double Loox", ["Loox", "Loox"]),
+    mushy: new OutertaleGroup(5, "Mushy", ["Mushy"]),
+    looxMigospWhimsun: new OutertaleGroup(6, "Outlands Triple", ["Loox", "Migosp", "Whimsun"]),
+    jerry: new OutertaleGroup(12, "Jerry", ["Jerry"]),
+    stardrake: new OutertaleGroup(10, "Stardrake", ["Stardrake"]),
+    spacetop: new OutertaleGroup(16, "Astro Serf", ["Astro Serf"]),
+    stardrakeSpacetopJerry: new OutertaleGroup(15, "Starton Triple", ["Stardrake", "Jerry", "Astro Serf"]),
+    stardrakeSpacetop: new OutertaleGroup(13, "Stardrake/Astro", ["Stardrake", "Astro Serf"]),
+    spacetopJerry: new OutertaleGroup(14, "Astro/Jerry", ["Astro Serf", "Jerry"]),
+    mouse: new OutertaleGroup(11, "Whizkarat", ["Whizkarat"]),
+    woshua: new OutertaleGroup(21, "Woshua", ["Woshua"]),
+    moldbygg: new OutertaleGroup(22, "Moldbygg", ["Moldbygg"]),
+    moldfake: new OutertaleGroup(22, "Moldbygg (Disguised)", ["Moldbygg (Disguised)"]),
+    moldsmalMoldbygg: new OutertaleGroup(23, "Holy Moldy", ["Moldsmal", "Moldbygg (Disguised)"]),
+    woshuaMoldbygg: new OutertaleGroup(24, "Woshua/Mold", ["Woshua", "Moldbygg"]),
+    radtile: new OutertaleGroup(20, "Radtile", ["Radtile"]),
+    pyrope: new OutertaleGroup(30, "Pyrope", ["Pyrope"]),
+    tsundere: new OutertaleGroup(34, "Tsunderplane", ["Tsunderplane"]),
+    spacetopTsundere: new OutertaleGroup(32, "Astro/Tsunder", ["Astro Serf", "Tsunderplane"]),
+    pyropeTsundere: new OutertaleGroup(33, "Pyrope/Tsunder", ["Pyrope", "Tsunderplane"]),
+    perigee: new OutertaleGroup(31, "Perigee", ["Perigee"]),
 };
 const nonBullyable = [
     "Loox",
@@ -230,8 +231,8 @@ function runEncounter(area, chances) {
     steps_factor = overworld_rng.next();
     step_factors[area].push(steps_factor);
     const list = CosmosUtils.parse(encounters, []);
-    const group = CosmosMath.weigh(chances.filter(([group]) => (group === null) || !list.includes(group.name)), overworld_rng.next());
-    (group === null) || list.push(group.name);
+    const group = CosmosMath.weigh(chances.filter(([group]) => (group === null) || !list.includes(group.id)), overworld_rng.next());
+    (group === null) || list.push(group.id);
     list.length > 4 && list.shift();
     encounters_total[area].push(group);
     encounters = CosmosUtils.serialize(list);
