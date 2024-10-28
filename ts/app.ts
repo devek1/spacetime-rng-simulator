@@ -225,6 +225,7 @@ let step_factors : number[][] = [
 
 let playername : string = 'A';
 let outlands_skip : boolean = false,
+  is_chaotic : boolean = false,
   jetpack_skip : boolean = false;
 let outlandsreal : number,
   outlands1 : number,
@@ -347,17 +348,19 @@ function runSimulation() {
   }
   for (let i = 0; i < starton1; i++)
     Encounter(areas.Starton);
-  for (let i = 0; i < 7; i++)
-    overworld_rng.next_void()
+  if (!is_chaotic)
+    for (let i = 0; i < 7; i++)
+      overworld_rng.next_void()
   for (let i = 0; i < starton2; i++)
     Encounter(areas.Starton);
   for (let i = 0; i < foundry; i++)
     Encounter(areas.Foundry)
-  for (let i = 0; i < spears; i++)
-    overworld_rng.next_void()
+  if (!is_chaotic)
+    for (let i = 0; i < spears; i++)
+      overworld_rng.next_void()
   for (let i = 0; i < aerialis; i++)
     Encounter(areas.Aerialis);
-  if (!jetpack_skip) {
+  if (!jetpack_skip && !is_chaotic) {
       overworld_rng.next_void();
       for (let i = 0; i < 16; i++) {
           overworld_rng.next_void();
@@ -377,7 +380,7 @@ function runSimulation() {
     if (i == 0 && !outlands_skip) {
       results.textContent += "Outlands Puzzle 1 pattern: " + outlands_puzzle1 + "\r\nOutlands Puzzle 3 pattern: " + outlands_puzzle3 + "\r\n"
     }
-    if (i == 3 && !jetpack_skip) {
+    if (i == 3 && !jetpack_skip && !is_chaotic) {
       results.textContent += "Jetpack booster pattern: " + jetpack_boosters.map<string>((x : boolean) => x ? "Good" : "Bad") + "\r\n"
     }
     //results.textContent += "Total potential Kills in Area: " + kills[i] + " \r\nTotal potential Bullies in Area: " + bullies[i] + " \r\n";

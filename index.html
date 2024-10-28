@@ -27,7 +27,7 @@
 
   <!-- Add your site or application content here -->
   <h2>Name</h2>
-  <input type="string" id="name" value="A" onchange="playername=this.value;
+  <input type="text" id="name" value="A" onchange="playername=this.value;
       namewarning.textContent = this.value.length > 6 ? 'Warning: name is too long to use legitimately' : ''" />
   <h1 id="namewarning"></h1>
   <h2>Outlands</h2>
@@ -38,6 +38,7 @@
     Number of encounters before third puzzle: <input type="number" id="outlands2" onchange="outlands2=this.value"> <br/>
     Number of encounters before fourth puzzle: <input type="number" id="outlands3" onchange="outlands3=this.value"> <br/>
     Number of encounters after all puzzles: <input type="number" id="outlands4" onchange="outlands4=this.value"> <br/>
+    Chaotic Route: <input type="checkbox" id="is_chaotic" onchange="is_chaotic=this.checked"> <br/>
     (it is recommended to do most encounters at the very start, going in and out of zigzag room inbetween, for a full encounter count reset) <br/>
     (it is assumed that you complete each Outlands puzzle on the first roll, and don't leave and re-enter any room with an active puzzle)
   </p>
@@ -60,7 +61,7 @@
   <h2>Aerialis</h2>
   <p>
     Number of encounters before Arts & Crafts show: <input type="number" id="aerialis" onchange="aerialis=this.value"> <br/>
-    Jetpack Skip (or playing Chaotic): <input type="checkbox" id="jetpack_skip" onchange="jetpack_skip=this.checked"> <br/>
+    Jetpack Skip: <input type="checkbox" id="jetpack_skip" onchange="jetpack_skip=this.checked"> <br/>
     Number of encounters after Jetpack minigame: <input type="number" id="aerialis2" onchange="aerialis2=this.value"> <br/>
     Any Mettaton show room, as well as the elevators and Alphys's lab, all give full encounter count resets.
   </p>
