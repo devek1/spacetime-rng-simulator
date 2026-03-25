@@ -101,6 +101,7 @@ const CosmosUtils = {
         return array;
     }),
     provide(provider, ...args) {
+        // @ts-ignore
         return typeof provider === 'function' ? provider(...args) : provider;
     },
     serialize(value, beautify = false) {

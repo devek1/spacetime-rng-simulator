@@ -145,6 +145,7 @@ const CosmosUtils = {
     provider: A,
     ...args: A extends CosmosProvider<infer _, infer C> ? C : never
   ): A extends CosmosProvider<infer B, any[]> ? B : never {
+    // @ts-ignore
     return typeof provider === 'function' ? provider(...args) : provider;
   },
   serialize (value: any, beautify = false) {
