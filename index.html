@@ -64,7 +64,11 @@
   <h2>Aerialis</h2>
   <p>
     Number of encounters before Arts & Crafts show: <input type="number" id="aerialis" onchange="aerialis=this.value"> <br/>
-    Did old (Savewarp) Jetpack Skip: <input type="checkbox" id="jetpack_skip" onchange="jetpack_skip=this.checked"> <br/>
+    Jetpack Skip: <select name="jetpack_skip_dropdown" onchange="jetpack_skip=this.value">
+    <option value="none">No Jetpack Skip</option>
+    <option value="new">New Jetpack Skip (autowalk OoB)</option>
+    <option value="old">Old Jetpack Skip (save wrong warp)</option>
+  </select><br/>
     Number of encounters after Jetpack minigame: <input type="number" id="aerialis2" onchange="aerialis2=this.value"> <br/>
     Any Mettaton show room, as well as the elevators and Alphys's lab, all give full encounter count resets.
   </p>
